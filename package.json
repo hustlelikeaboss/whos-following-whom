@@ -4,7 +4,7 @@
   "private": false,
   "scripts": {
     "start": "nodemon server.js",
-    "test": "PORT=9999 mocha --recursive --exit"
+    "test": "mocha --recursive --exit"
   },
   "dependencies": {
     "axios": "^0.18.0",

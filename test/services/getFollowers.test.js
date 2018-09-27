@@ -12,7 +12,7 @@ const response = require('../data/hustlelikeaboss.followers');
 /**
  * TEST ENDPOINT: /ping
  */
-describe('GET FOLLOWERS FOR USER HUSTLELIKEABOSS', () => {
+describe('TEST getFollowers.byUsername("hustlelikeaboss")', () => {
 
     beforeEach(() => {
         nock('https://api.github.com')
@@ -26,9 +26,9 @@ describe('GET FOLLOWERS FOR USER HUSTLELIKEABOSS', () => {
             .then(followers => {
                 followers.should.be.a('array');
                 followers.should.have.lengthOf(3);
-
-                done();
             });
+
+        done();
     });
 
 

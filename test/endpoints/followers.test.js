@@ -10,7 +10,7 @@ const server = require('../../server');
 /**
  * TEST ENDPOINT: /api/followers/:username
  */
-describe('GET FOLLOWERS FOR USER HUSTLELIKEABOSS', () => {
+describe('TEST get("/api/followers/hustlelikeaboss")', () => {
     it('should return an array of 3 followers with status code 200', (done) => {
         let username = 'hustlelikeaboss';
         chai.request(server)
@@ -20,7 +20,7 @@ describe('GET FOLLOWERS FOR USER HUSTLELIKEABOSS', () => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
                 res.body.should.have.lengthOf(3);
-                done();
             });
+        done();        
     });
 });
