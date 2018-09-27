@@ -1,0 +1,27 @@
+{
+  "name": "github-api",
+  "version": "0.0.1",
+  "private": false,
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "PORT=9999 mocha --recursive --exit"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "dotenv": "^5.0.1",
+    "express": "~4.16.0",
+    "express-async-handler": "^1.1.4",
+    "http-errors": "~1.6.2",
+    "morgan": "^1.9.1",
+    "nock": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "jest": "^22.4.3",
+    "mocha": "^5.2.0"
+  }
+}
