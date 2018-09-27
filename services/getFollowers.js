@@ -11,7 +11,6 @@ const byUsername = async (username) => {
     return await byUrl(url);
 }
 
-
 /**
  * @param {*} url
  * @returns array of users 
@@ -61,9 +60,59 @@ const threeLevelsDeepFor = async (username) => {
     return followers;
 }
 
+/**
+ * 
+ * @param {*} followersOfFollowersFollowers 
+ */
+const withTheirIDsOnlyThreeLevelsDeep = async (followersOfFollowersFollowers) => {
+    // level 1
+    let followerIDs = followersOfFollowersFollowers.map((follower) => {
+        return {
+            id: follower.id,
+            followers: follower.followers
+        }
+    });
+    console.log(followerIDs);
+
+    // level 2
+    followerIDs = followerIDs.map((user) => {
+        let userFollowerIDs = user.followers.map((follower) => {
+            return {
+                id: follower.id,
+                followers: follower.followers
+            }
+        })
+        return {
+            id: user.id,
+            followers: userFollowerIDs
+        };
+    })
+    console.log(followerIDs);
+
+    // level 3
+    followerIDs = followerIDs.map((user) => {
+        let userFollowersFollowersIDs = user.followers.map((follower) => {
+            let theirFollowerIDs = follower.followers.map( (theirFollower) => theirFollower.id );
+            return {
+                id: follower.id,
+                followers: theirFollowerIDs
+            };
+        })
+        
+        return {
+            id: user.id,
+            followers: userFollowersFollowersIDs
+        };
+    })
+    console.log(followerIDs);
+
+    return followerIDs;
+}
+
 module.exports = {
     byUsername,
     byUrl,
     forArrayOfUsers,
-    threeLevelsDeepFor
+    threeLevelsDeepFor,
+    withTheirIDsOnlyThreeLevelsDeep
 };

@@ -9,13 +9,17 @@ const {
 } = require('../utils/axios.utils');
 
 /**
- * GET: followers endpoint - /api/followers
+ * GET: followers endpoint - /api/followers/:username
  */
 router.get('/:username', asyncWrapper(async (req, res, next) => {
+    // get a user's followers' followers' followers and their full data
     const followersOfFollowersFollowers = await getFollowers.threeLevelsDeepFor(req.params.username);
 
+    // parse user ids
+    const followerIDs = await getFollowers.withTheirIDsOnlyThreeLevelsDeep(followersOfFollowersFollowers);
+    
     // send response
-    res.status(200).send(followersOfFollowersFollowers);
+    res.status(200).send(followerIDs);
 }));
 
 module.exports = router;
