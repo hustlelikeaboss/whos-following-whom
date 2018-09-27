@@ -12,36 +12,10 @@ const {
  * GET: followers endpoint - /api/followers
  */
 router.get('/:username', asyncWrapper(async (req, res, next) => {
-    // followers: 1 level deep
-    let followers = await getFollowers.byUsername(req.params.username);
+    const followersOfFollowersFollowers = await getFollowers.threeLevelsDeepFor(req.params.username);
 
-    // followers of followers: 2 level deep
-    let unresolvedPromises = followers.map( async (follower) => {
-        let theirFollowers = await getFollowers.byUrl(follower.followers_url);
-        follower.theirFollowers = theirFollowers;
-
-        return follower;
-    });
-    followers = await Promise.all(unresolvedPromises);
-
-    // followers of followers' followers: 3 level deep
-    unresolvedPromises = followers.map( async (follower) => {
-        let theirFollowers = follower.theirFollowers;
-
-        let nestedUnresolvedPromises = theirFollowers.map( async (follower) => {
-            let theirFollowers = await getFollowers.byUrl(follower.followers_url);
-            follower.theirFollowers = theirFollowers;
-    
-            return follower;
-        });
-        theirFollowers = await Promise.all(nestedUnresolvedPromises);
-
-        follower.theirFollowers = theirFollowers;
-        return follower;
-    });
-    followers = await Promise.all(unresolvedPromises);
-
-    res.status(200).send(followers);
+    // send response
+    res.status(200).send(followersOfFollowersFollowers);
 }));
 
 module.exports = router;

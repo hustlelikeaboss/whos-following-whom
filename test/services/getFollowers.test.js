@@ -9,7 +9,10 @@ chai.use(chaiHttp);
 const server = require('../../server');
 const getFollowers = require('../../services/getFollowers');
 const response = require('../data/hustlelikeaboss.followers');
-
+const GITHUB_CLIENT_AUTH = {
+    client_id: process.env.GITHUB_CLIENT_ID,
+    client_secret: process.env.GITHUB_CLIENT_SECRET
+}
 /**
  * TEST  getFollowers.byUsername()
  */
@@ -18,6 +21,7 @@ describe('TEST getFollowers.byUsername("hustlelikeaboss")', () => {
     beforeEach(() => {
         nock('https://api.github.com')
             .get('/users/hustlelikeaboss/followers')
+            .query({params: GITHUB_CLIENT_AUTH})
             .reply(200, response);
     });
 
@@ -43,14 +47,17 @@ describe('TEST getFollowers.forArrayOfUsers()', () => {
     beforeEach(() => {
         nock('https://api.github.com')
             .get('/users/beyhosni/followers')
+            .query({params: GITHUB_CLIENT_AUTH})
             .reply(200, response[0].theirFollowers);
 
         nock('https://api.github.com')
             .get('/users/brittanymwagner/followers')
+            .query({params: GITHUB_CLIENT_AUTH})
             .reply(200, response[1].theirFollowers);
 
         nock('https://api.github.com')
             .get('/users/ryhan000/followers')
+            .query({params: GITHUB_CLIENT_AUTH})
             .reply(200, response[2].theirFollowers);
     });
 

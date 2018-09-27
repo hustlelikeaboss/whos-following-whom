@@ -31,15 +31,39 @@ const byUrl = async (url, limit = 5) => {
  */
 const forArrayOfUsers = (users) => {
     return users.map( async (user) => {
-        let followers = await getFollowers.byUrl(user.followers_url);
+        let followers = await byUrl(user.followers_url);
         user.followers = followers;
 
+        return user;
+    });
+}
+
+const threeLevelsDeepFor = async (username) => {
+    // Get followers: 1 level deep
+    let followers = await byUsername(username);
+
+    // Get followers of followers: 2 level deep
+    let unresolvedPromises = forArrayOfUsers(followers);
+    followers = await Promise.all(unresolvedPromises);
+
+    // Get followers of followers' followers: 3 level deep
+    unresolvedPromises = followers.map( async (follower) => {
+        let theirFollowers = follower.followers;
+
+        let nestedUnresolvedPromises = forArrayOfUsers(theirFollowers);
+        theirFollowers = await Promise.all(nestedUnresolvedPromises);
+
+        follower.followers = theirFollowers;
         return follower;
     });
+    followers = await Promise.all(unresolvedPromises);
+
+    return followers;
 }
 
 module.exports = {
     byUsername,
     byUrl,
-    forArrayOfUsers
+    forArrayOfUsers,
+    threeLevelsDeepFor
 };
