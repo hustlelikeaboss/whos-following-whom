@@ -1,12 +1,8 @@
 // DEPENDENCIES
 const express = require('express');
 const router = express.Router();
-const asyncHandler = require('express-async-handler');
 const asyncWrapper = require('../utils/async.wrapper');
 const getFollowers = require('../services/getFollowers');
-const {
-    getData
-} = require('../utils/axios.utils');
 
 /**
  * GET: followers endpoint - /api/followers/:username
