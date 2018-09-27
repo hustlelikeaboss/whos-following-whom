@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
             },
             {
                 url:'/api/followers/:username',
-                description: 'This endpoint takes a a Github user\'s username and return a nested three-level deep array'
+                description: 'This endpoint takes a Github user\'s username as a parameter and return a nested three-level deep array'
             }
         ]
     });

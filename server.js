@@ -8,6 +8,7 @@ require('dotenv').config();
 
 // LOCAL DEPENDENCIES
 const errorHandler = require('./utils/errorHandler.middleware')
+const indexEndpoint = require('./endpoints/index.endpoint');
 const healthEndpoint = require('./endpoints/health.endpoint');
 const followersEndpoint = require('./endpoints/followers.endpoint');
 
@@ -26,6 +27,7 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.use(errorHandler);
 
 // routes
+server.use('/', indexEndpoint);
 server.use('/ping', healthEndpoint);
 server.use('/api/followers', followersEndpoint);
 
