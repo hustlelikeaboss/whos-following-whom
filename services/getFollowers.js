@@ -68,7 +68,7 @@ const withTheirIDsOnlyThreeLevelsDeep = async (followersOfFollowersFollowers) =>
     // level 1
     let followerIDs = followersOfFollowersFollowers.map((follower) => {
         return {
-            id: follower.id,
+            id: follower.login,
             followers: follower.followers
         }
     });
@@ -77,7 +77,7 @@ const withTheirIDsOnlyThreeLevelsDeep = async (followersOfFollowersFollowers) =>
     followerIDs = followerIDs.map((user) => {
         let userFollowerIDs = user.followers.map((follower) => {
             return {
-                id: follower.id,
+                id: follower.login,
                 followers: follower.followers
             }
         })
@@ -90,7 +90,7 @@ const withTheirIDsOnlyThreeLevelsDeep = async (followersOfFollowersFollowers) =>
     // level 3
     followerIDs = followerIDs.map((user) => {
         let userFollowersFollowersIDs = user.followers.map((follower) => {
-            let theirFollowerIDs = follower.followers.map( (theirFollower) => theirFollower.id );
+            let theirFollowerIDs = follower.followers.map( (theirFollower) => theirFollower.login );
             return {
                 id: follower.id,
                 followers: theirFollowerIDs
