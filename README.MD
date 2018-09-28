@@ -7,7 +7,7 @@ https://github-endpoints.herokuapp.com
 
 - To check server status: https://github-endpoints.herokuapp.com/ping
 - To get basic followers info (replace ''): https://github-endpoints.herokuapp.com/api/followers/hustlelikeaboss
-- To get full data: To get followers: https://github-endpoints.herokuapp.com/api/followers/hustlelikeaboss?full=true
+- To get full followers info: https://github-endpoints.herokuapp.com/api/followers/hustlelikeaboss?full=true
 
 (Replace 'hustlelikeaboss' with any other username)
 
