@@ -12,14 +12,14 @@
     "debug": "~2.6.9",
     "dotenv": "^5.0.1",
     "express": "~4.16.0",
-    "morgan": "^1.9.1",
-    "nock": "^10.0.0"
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.3",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "jest": "^22.4.3",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nock": "^10.0.0"
   }
 }

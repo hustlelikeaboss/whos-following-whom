@@ -15,11 +15,11 @@ router.get('/', (req, res) => {
             },
             {
                 url: '/ping',
-                description: 'Health check. Should return {server:"up"} if everything goes well'
+                description: "Health check. Should return {'server':'up'} if everything goes well."
             },
             {
                 url:'/api/followers/:username',
-                description: 'This endpoint takes a Github user\'s username as a parameter and return a nested three-level deep array'
+                description: "This endpoint takes a GitHub user's username as a path variable (and an optional query parameter) and return a 3D array. Example: '/api/followers/hustlelikeaboss'. By default, only IDs are returned. Add '?full=true' to the end of the url to get all the data related to each user in the array."
             }
         ]
     });

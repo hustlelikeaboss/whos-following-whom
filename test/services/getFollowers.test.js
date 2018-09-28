@@ -6,13 +6,14 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 // LOCAL IMPORTS
-const server = require('../../server');
 const getFollowers = require('../../services/getFollowers');
-const response = require('../data/hustlelikeaboss.followers');
+const RESPONSE_FOLLOWERS = require('../data/hustlelikeaboss.followers');
+const RESPONSE_FOLLOWER_IDS = require('../data/hustlelikeaboss.followers.ids');
 const GITHUB_CLIENT_AUTH = {
     client_id: process.env.GITHUB_CLIENT_ID,
     client_secret: process.env.GITHUB_CLIENT_SECRET
 }
+
 /**
  * TEST  getFollowers.byUsername()
  */
@@ -22,9 +23,8 @@ describe('TEST getFollowers.byUsername("hustlelikeaboss")', () => {
         nock('https://api.github.com')
             .get('/users/hustlelikeaboss/followers')
             .query({params: GITHUB_CLIENT_AUTH})
-            .reply(200, response);
+            .reply(200, RESPONSE_FOLLOWERS);
     });
-
 
     it('should return an array of 3 followers with status code 200', (done) => {
          getFollowers.byUsername('hustlelikeaboss')
@@ -36,7 +36,7 @@ describe('TEST getFollowers.byUsername("hustlelikeaboss")', () => {
         done();
     });
 
-
+    nock.cleanAll();
 });
 
 /**
@@ -48,17 +48,17 @@ describe('TEST getFollowers.forArrayOfUsers()', () => {
         nock('https://api.github.com')
             .get('/users/beyhosni/followers')
             .query({params: GITHUB_CLIENT_AUTH})
-            .reply(200, response[0].theirFollowers);
+            .reply(200, RESPONSE_FOLLOWERS[0].followers);
 
         nock('https://api.github.com')
             .get('/users/brittanymwagner/followers')
             .query({params: GITHUB_CLIENT_AUTH})
-            .reply(200, response[1].theirFollowers);
+            .reply(200, RESPONSE_FOLLOWERS[1].followers);
 
         nock('https://api.github.com')
             .get('/users/ryhan000/followers')
             .query({params: GITHUB_CLIENT_AUTH})
-            .reply(200, response[2].theirFollowers);
+            .reply(200, RESPONSE_FOLLOWERS[2].followers);
     });
 
 
@@ -79,4 +79,15 @@ describe('TEST getFollowers.forArrayOfUsers()', () => {
         resolvedUsers[0].followers.should.have.lengthOf(5);
     });
 
+    nock.cleanAll();
+});
+
+/**
+ * TEST  getFollowers.withTheirIDsOnlyThreeLevelsDeep()
+ */
+describe('TEST getFollowers.withTheirIDsOnlyThreeLevelsDeep()', () => {
+    it('should return a 3D array', async () => {
+        let result = await getFollowers.withTheirIDsOnlyThreeLevelsDeep(RESPONSE_FOLLOWERS);
+        result.should.deep.equal(RESPONSE_FOLLOWER_IDS);
+    });
 });

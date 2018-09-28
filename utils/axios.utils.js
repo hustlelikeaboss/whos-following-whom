@@ -12,9 +12,13 @@ const GITHUB_CLIENT_AUTH = {
 const getData = (url, params = {}) => {
     return axios({
         method: 'get',
-        url: url,
-        params: Object.assign(params, GITHUB_CLIENT_AUTH),
-        responseType: 'json',
+        url: `${url}?client_id=${GITHUB_CLIENT_AUTH.client_id}&${GITHUB_CLIENT_AUTH.client_secret}`,
+        params: params,
+        headers: {
+            'accept': 'application/json, text/plain, */*',
+            'user-agent': 'axios/0.18.0',
+            'accept-encoding': '*'
+          }
     })
 }
 
@@ -26,8 +30,8 @@ const getData = (url, params = {}) => {
 const postData = (url, params) => {
     return axios({
         method: 'post',
-        url: url,
-        data: Object.assign(params, GITHUB_CLIENT_AUTH),
+        url: `${url}?client_id=${GITHUB_CLIENT_AUTH.client_id}&${GITHUB_CLIENT_AUTH.client_secret}`,
+        data: params,
     })
 }
 
