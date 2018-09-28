@@ -1,12 +1,15 @@
 # Github API example
 
-This Node/Express app features an API endpoint that accepts a Github ID (username/login) and returns Follower GitHub ID's (ip to 5 Followers total) associated with the passed in GitHub ID. It retreives data up to 3 levels deep, repeating the process of retrieving Followers (up to 5 Followers total) for each Followers found. The returned data is in JSON format.
+This Node/Express app features an API endpoint that accepts a Github ID (username) and returns Follower GitHub ID's (ip to 5 Followers total) associated with the passed in GitHub ID. It retreives data up to 3 levels deep, repeating the process of retrieving Followers (up to 5 Followers total) for each Followers found. The returned data is in JSON format.
 
 ## Live URL
 https://github-endpoints.herokuapp.com
 
-To check server status: https://github-endpoints.herokuapp.com/ping
-To get followers: https://github-endpoints.herokuapp.com/api/followers/hustlelikeaboss
+- To check server status: https://github-endpoints.herokuapp.com/ping
+- To get basic followers info (replace ''): https://github-endpoints.herokuapp.com/api/followers/hustlelikeaboss
+- To get full data: To get followers: https://github-endpoints.herokuapp.com/api/followers/hustlelikeaboss?full=true
+
+(Replace 'hustlelikeaboss' with any other username)
 
 ## Run the app locally
 - Open up your favorite command tool
