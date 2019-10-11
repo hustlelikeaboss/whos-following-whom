@@ -1,21 +1,19 @@
-# Github API example
+# GitHub Follower Tree
 
-This Node/Express app features an API endpoint that accepts a Github ID (username) and returns Follower GitHub ID's (ip to 5 Followers total) associated with the passed in GitHub ID. It retreives data up to 3 levels deep, repeating the process of retrieving Followers (up to 5 Followers total) for each Followers found. The returned data is in JSON format.
+This Node/Express app contains an API endpoint that accepts a GitHub ID (username) and returns the following data in JSON format:
+- the ID's of up to 5 of their followers; and
+- for each follower, the ID's of their followers; and
+- for each follower's follower, the the ID's of their followers. 
 
-## Live URL
+
+## Demo
 https://github-endpoints.herokuapp.com
 
 - To check server status: https://github-endpoints.herokuapp.com/ping
-- To get basic followers info (replace ''): https://github-endpoints.herokuapp.com/api/followers/hustlelikeaboss
-- To get full followers info: https://github-endpoints.herokuapp.com/api/followers/hustlelikeaboss?full=true
-
-(Replace 'hustlelikeaboss' with any other username)
+- To get basic followers info: https://github-endpoints.herokuapp.com/api/followers/USERNAME
+- To get full followers info: https://github-endpoints.herokuapp.com/api/followers/USERNAME?full=true
 
 ## Run the app locally
-- Open up your favorite command tool
-- `cd` to the directory that you would like to store the code
-- Run `git clone` to copy the code to the directory
-- `cd` inside the newly generated directory
 - Run `npm install`
+- Run `npm start` to start the server
 - Run `npm test` to execute tests
-- Run `npm start` and go to 'localhost:4000/' in a brower of choice
