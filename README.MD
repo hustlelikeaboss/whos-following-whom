@@ -1,5 +1,7 @@
 # GitHub Follower Tree
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/hustlelikeaboss/whos-following-whom.svg)](https://greenkeeper.io/)
+
 This Node/Express app contains an API endpoint that accepts a GitHub ID (username) and returns the following data in JSON format:
 - the ID's of up to 5 of their followers; and
 - for each follower, the ID's of their followers; and
